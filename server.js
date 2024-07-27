@@ -1209,7 +1209,7 @@ app.get("/create-meet-event", async (req, res) => {
     }
     const event = await createMeetEvent(oauth2Client, webinar);
     console.log(event);
-    res.redirect(`${process.env.FRONTEND_URLTEST}/webinars`);
+    res.redirect(`${process.env.FRONTEND_URL}/webinars`);
   } catch (error) {
     res.status(500).send("Error creating event");
   }
