@@ -1031,13 +1031,13 @@ app.get("/pay/:name/:mail/:isMentor", async (req, res) => {
     },
     {
       name: "Advance",
-      price: 199, // in INR
+      price: 149, // in INR
       days: 100,
       isMentor: "true",
     },
     {
       name: "Premium",
-      price: 499,
+      price: 399,
       days: 365,
       isMentor: "true",
     },
