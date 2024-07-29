@@ -755,6 +755,34 @@ app.get("/getMentors", async (req, res) => {
   }
 });
 
+app.get("/getMentorsAdmin", async (req, res) => {
+  try {
+    const mentors = await Mentor.find().sort({ postedOn: -1 });
+    if (!mentors) {
+      res.status(201).send("No mentors found");
+    }
+    res.send(mentors);
+  } catch (error) {
+    console.error("Error fetching mentors:", error);
+    res.status(500).send(error);
+  }
+});
+
+app.get("/updateMentorViaAdmin", async(req,res) => {
+  try {
+    const mentor = await Mentor.findById(req.query.id)
+
+    mentor.isPremium = true;
+    mentor.plans.push(req.query.plan)
+
+    await mentor.save();
+    res.status(200).send("Payment Updated Successfully.")
+
+  }catch(error){
+    res.status(500).send("Internal server error")
+  }
+})
+
 app.get("/getMentor/:id", async (req, res) => {
   try {
     const mentor = await Mentor.findOne({ _id: req.params.id });
