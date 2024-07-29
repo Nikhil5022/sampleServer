@@ -783,6 +783,23 @@ app.get("/updateMentorViaAdmin", async(req,res) => {
   }
 })
 
+// updateUserViaAdmin
+
+app.get("/updateUserViaAdmin", async(req,res) => {
+  try {
+    const user = await User.findById(req.query.id)
+
+    user.isPremium = true;
+    user.plans.push(req.query.plan)
+
+    await user.save();
+    res.status(200).send(user)
+
+  }catch(error){
+    res.status(500).send("Internal server error")
+  }
+})
+
 app.get("/getMentor/:id", async (req, res) => {
   try {
     const mentor = await Mentor.findOne({ _id: req.params.id });
